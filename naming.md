@@ -1,46 +1,44 @@
-# Test naming
+# Naming
 
-Names describe behavior, not code. A non-programmer must understand the name.
+Bad names explain code. Good names explain behavior rules a non-programmer understands. Behavior does not change after refactoring.
+`Calculates price and adds fee fields from the order object` → `Applies standard shipping rate for orders of medium package size`
+`Handles touch event and assigns event data to field` → `Remembers last touch screen coordinates`
 
-## Describe blocks
+When writing names gather behavior context. Reference source code, find consumers if it's unclear from source. If not enough context explicitly warn user or refuse to make up behavior.
 
-Only the root `describe()` may name a code entity. Nested blocks group by behavior and obey the rules below.
+Code entities, literals and keywords break on refactor. Functions, variable names, return, null, true/false are red flags. Pay attention: can be subtle.
+`stopTimer returns null if timer has not started` → `Stopping a timer that hasn't started is ignored`
+`Calculate shipping fee uses order weight to determine the correct rate` → `Heavier orders pay a higher shipping fee`
+`Refund amount returns to the customer's balance after order cancellation` → `Order cancellation refunds to customer's balance`
 
-root: `BillingService`, `FormComponent`, `mapUtmParamsToOnelink` nested: `Balance updates`, `Form validation`, `Maps parameters`
+Naming templates like `should...` or `[method] - [scenario] - [result]` make names less informative and longer.
+`Should display a loading spinner on component init` → `Displays a loading spinner on component init`
+`sendCodeType - a valid code is sent - returns true` → `Sends the computed auth response code`
 
-## Reject a name for any of these
+Keep names concise but informative. Names must fully explain the behavior but not be redundant or vague. Find balance.
+`A valid user is renamed successfully when given a valid name` → `Renames user with a valid name` - simple rule, short name
+`Updates balance` → `Purchasing for an order deducts funds from the user's balance` - complex rule, long name
 
-- `template` — any fixed opening formula: `should ...`, `Test that ...`, `[method] - [scenario] - [result]`.
-- `code` — a method, type, variable, or argument name. Refactoring does not update name strings.
-- `literal` — a keyword or raw value: `return`, `throw`, `true`, `false`, `null`, `undefined`. Inflections count.
-- `magic` — a number the reader must convert or verify elsewhere: `3600 seconds`, `$50`, `over 100`. Keep a number the reader grasps at once: `404`, `weekend`, `third attempt`.
-- `compiled` — a `${param}` in the middle of the name. Put parameters first or last, never inside the sentence.
-- `vague` — too short to identify the behavior or to find by search. Parameter names count: `${rawDate}`, not `${input}`.
-- `verbose` — empty words such as `correctly` or `successfully`. Also a repeated condition.
-- `duplicate` — a name that repeats another name in the same file. Cases of one parameterized test are exempt.
+No magic values. Auto refactoring can update values but not test name strings.
+`Adds a delivery fee for orders under $50` → `Adds a delivery fee for orders below free shipping threshold`
+`Password reset token expires after 1 hour` → `Password reset token expires after a delay`
 
-Exception: utility code without business logic. Use technical terms. Rule `code` still applies.
+Prefer clarity over conciseness. Do not use non-standard abbreviations and shortenings.
+`Opening a non-existing page redirects to 404 page` → `Opening a non-existing page redirects to not found page`
+`Maps addr DTO` → `Maps address DTO`
 
-Read the source under test before you name or rename it. A `vague` name lacks the facts for a rewrite. Never invent a domain fact.
+Unique names within one suite are searchable and easy to find. Use parameterized tests' parameters in names. Test runner will show what parameters failed.
+`Validates email by the RFC 5322 standard` → `${email} follows RFC 5322 standard`
 
-## Examples
+Variables in the middle of parameterized test names interrupt reading.
+`Maps UTM parameter ${utmParam} to ${onelinkParam} for a given config` → `Maps UTM parameters to Onelink: ${utmParam} -> ${onelinkParam}`
+`Settings of fetched ${currentOrder} are saved to persistent storage` → `${currentOrder} settings are saved to persistent storage`
 
-✓ `User is renamed with a valid name`
-✗ `renameUser should return true when name is valid` — template, code, literal
-✗ `A valid user is renamed successfully when given a valid name` — verbose
+Variables in names must be descriptive too. Improves clarity.
+`Formats raw dates to the user locale: ${input} -> ${output}` → `Formats raw dates to the user locale: ${rawDate} - ${localizedDate}`
 
-✓ `Price is unavailable for a trip without a route`
-✗ `should return false when tariff has no routeMeta` — template, literal, code
+Root `describe()` block must include tested entity. Technically contains a code entity, but useful to find the suite.
+`BillingService`, `FormComponent`, `highlightSearchMatches`
 
-✓ `Maps UTM parameters to Onelink: ${utmParam} -> ${onelinkParam}` — utility code, technical terms allowed
-✗ `mapUtmParams() correctly maps utmParams arg based on UtmMapperConfig` — code, verbose
-✗ `Maps UTM parameter ${a} to ${b} for a given config` — compiled, vague
-✗ `Maps UTM parameters` — vague
-
-✓ `Applies standard shipping rate below the free-shipping threshold: ${amount}`
-✗ `Applies standard shipping rate for orders under $50: ${amount}` — magic
-
-✓ `${address} is a valid email` — a leading parameter keeps the sentence readable
-✗ `isValidEmail returns true for ${address}` — code, literal
-
-✓ `Destination address is visible for multi-destination orders` — domain logic earns a longer name
+Use nested `describe()` blocks to group tests by behavior.
+`Balance updates`, `Form validation`, `Protects against XSS attacks`

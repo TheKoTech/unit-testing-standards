@@ -20,6 +20,6 @@ Replace {runner} with vitest, jest or jasmine. Default: vitest. Read all files t
 - ./what-to-test.md when deciding what code to cover or reviewing cases
 - ./new-angular-suite.{runner}.md when planning a new angular test suite
 - ./components.{runner}.md when editing or reviewing component tests
-- ./mocking-pattern.{runner}.md when editing, editing or reviewing suite mocks
+- ./mocking-pattern.{runner}.md when editing or reviewing suite mocks
 
 ./codestyle.{runner}.md describes all best practices and how to fix anti-patterns. Use it only when editing or reviewing individual cases

@@ -29,7 +29,7 @@ Tests describe behavior, not code.
 - BAD: Including implementation details: NEVER include method names, NEVER include variable names, NEVER include technical types, or other code entities in test names.
 - GOOD: Use domain language and business logic: DO write the title as a business rule that a non-programmer could understand.
   - EXCEPTION: When testing UTILITY CODE: If there is no business logic to go off of, you may use technical terms, but NEVER method names, NEVER variable names, NEVER technical types or other code entities.
-- GOOD: Concise names that are natural to read and easy to understand for anyone, not just developers: testers, business analytics, even managers.
+- GOOD: Concise names that are natural to read and easy to understand for anyone, not just developers: testers, business analysts, even managers.
 - BAD: Names that have to be "compiled" to be read. DO NOT write template strings with variables in the middle, DO NOT extract the test name into a parameterized test argument. OK to leave parameters at the end of the name to differentiate cases.
 
 Examples:
@@ -39,7 +39,7 @@ Examples:
 - BAD: `mapUtmParams() correctly maps utmParams arg based on UtmMapperConfig`: BAD: `mapUtmParams()` is a function name, `utmParams` is a function argument, `UtmMapperConfig` is a type
 - BAD: `A valid user is renamed successfully when given a valid name`. GOOD: Business rule, BAD: could be shortened.
 - BAD: `Maps UTM parameter ${a} to ${b} for a given config`: BAD: complicated name that has to be "compiled" with params.
-- GOOD: `Maps UTM parameters acording to the given configuration map for: ${a} ${b}`: OK: parameterized test with separate names, GOOD: logic, not code, BAD: unnecessarily long and descriptive name.
+- GOOD: `Maps UTM parameters according to the given configuration map for: ${a} ${b}`: OK: parameterized test with separate names, GOOD: logic, not code, BAD: unnecessarily long and descriptive name.
 - GOOD: `Maps UTM parameters to Onelink: ${input} -> ${expected}`: GOOD: consize and understandable, GOOD: parameters at the end, not in the middle, GOOD: unique enough to be easily searchable
 - BAD: `Maps UTM parameters`: GOOD: consize, BAD: not long enough to understand, BAD: not descriptive enough to be easily searchable
 - GOOD: `User is renamed with a valid name`: GOOD: Business rule, GOOD: no template, GOOD: resistant to refactoring - renaming won't require updating tests. GOOD: consize, but informative and searchable.
@@ -139,7 +139,7 @@ describe('UserService', () => {
     mockApi = jasmine.createSpyObj('UserApi', ['fetchUser']);
     
     // BAD: God Mock. Polluting baseline with scenario-specific business data
-    // BAD: arbitrary value instead of a proper mock forces adding arbitrary fields justto make test pass
+    // BAD: arbitrary value instead of a proper mock forces adding arbitrary fields just to make test pass
     mockApi.fetchUser.and.returnValue(of({ id: 123, name: 'John Smith', role: 'admin', friends: [] }));
 
     TestBed.configureTestingModule({
@@ -337,7 +337,7 @@ BAD: composite names require reader to look up param values to understand the te
 // BAD: Impossible to understand the rule without referencing the data/test logic
 it(`Checks ${userType} for ${action} with ${data}`)
 
-// TERRIBLE: `in`/`out`/`field`/`type` params are indiscriptive, which makes reading even harder
+// TERRIBLE: `in`/`out`/`field`/`type` params are indescriptive, which makes reading even harder
 it(`Runs validation for ${input} returning ${result}`)
 it(`Validates ${in} as ${out} for status code ${code}`)
 it(`Verifies that ${field} handles ${type} correctly`)

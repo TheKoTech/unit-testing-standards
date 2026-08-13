@@ -6,16 +6,18 @@ Bad name explains code. Good name explains a behavior rule, a non-programmer und
 
 When writing names, gather behavior context. Reference source code, find consumers if it's unclear from source.
 
-Code entities and literals will break on refactor.
-`renameUser returns true when name is valid` -> `Renames user with a valid name`
+Code entities and literals will break on refactor. Pay attention: can be subtle.
+`isLoading input renders loading spinner component` -> `Renders loading spinner`
+`Calculate shipping fee uses order weight to determine the correct rate` -> `Heavier orders pay a higher shipping fee`
+`Refund amount returns to the customer's balance after order cancellation` -> `Order cancellation refunds to customer's balance`
 
 Naming templates like `should...` or `[method] - [scenario] - [result]` make names less informative and longer. Good names are free in expression.
 `Should display a loading spinner on component init` -> `Displays a loading spinner on component init`
 `sendCodeType - a valid code is sent - returns true` -> `Sends the computed auth response code`
 
-Keep names concize, but informative. Names must fully explain the behavior, but not be redundant or vague. Look for balance.
+Keep names concise, but informative. Names must fully explain the behavior, but not be redundant or vague. Look for balance.
 `A valid user is renamed successfully when given a valid name` -> `User is renamed with a valid name` - simple rule, short name
-`Updates balance` -> `Purchasing for an order deducts funds from the user's balanec` - complex rule, long name
+`Updates balance` -> `Purchasing for an order deducts funds from the user's balance` - complex rule, long name
 
 No magic values. Business logic changes will update values, but not test name strings.
 `Adds a delivery fee for orders under $50` -> `Adds a delivery fee for orders below free shipping threshold`
@@ -25,7 +27,7 @@ Prefer clarity over conciseness. Do not use non-standard abbreviations and short
 `Opening a non-existing page redirects to 404 page` -> `Opening a non-existing page redirects to not found page`
 `Maps addr DTO` -> `Maps address DTO`
 
-Unique names within one one suite are searchable and easy to find. Use parameterized tests' params in names. Test runner will show what params failed.
+Unique names within one suite are searchable and easy to find. Use parameterized tests' params in names. Test runner will show what params failed.
 `Validates email by the RFC 5322 standard` -> `${email} follows RFC 5322 standard`
 
 Variables in the middle of parameterized test names interrupt reading.

@@ -1,4 +1,4 @@
-This repo is a rewrite of a monolith `old SKILL.md` into separate files. Goal: minimize token usage, increase quality, fine-tune rules. Hard requirements:
+This repo is a rewrite of a monolith `old SKILL.md` into separate files. Goal: minimize token usage, increase quality, revisit and refine rules. Hard requirements:
 
 - All rules must be beneficial. If a rule adds a constraint for no benefit, it must be cut.
 - Aggressive token reduction. All new skill text must be as compact and dense as possible

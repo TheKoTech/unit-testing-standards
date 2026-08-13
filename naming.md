@@ -19,6 +19,9 @@ Keep names concise but informative. Names must fully explain the behavior but no
 `A valid user is renamed successfully when given a valid name` → `Renames user with a valid name` - simple rule, short name
 `Updates balance` → `Purchasing for an order deducts funds from the user's balance` - complex rule, long name
 
+Test name states one unit of behavior for maintainability and focused failures. Names that join behavior with "and" signals the test checks too much and should split.
+`Cart is emptied and total resets after checkout` → `Cart is empty after checkout completes`, `Total resets after checkout completes`
+
 No magic values. Auto refactoring can update values but not test name strings.
 `Adds a delivery fee for orders under $50` → `Adds a delivery fee for orders below free shipping threshold`
 `Password reset token expires after 1 hour` → `Password reset token expires after a delay`

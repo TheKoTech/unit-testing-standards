@@ -2,6 +2,7 @@
 name: unit-testing-standards
 description: Unit Testing Standards
 disable-model-invocation: true
+# tokens: 5595, chars: 21625
 ---
 
 # Unit Testing Standards

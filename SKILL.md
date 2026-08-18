@@ -14,11 +14,9 @@ In larger codebases regressions are more frequent and fixing them can cause more
 
 Rules below *usually* result in higher test value. If following a rule lowers it or makes no difference, ignore the rule.
 
-Replace {runner} with vitest, jest or jasmine. Default: vitest. Read all files that apply. Use:
+Replace {runner} with vitest, jest or jasmine. Default: vitest. Read all files that apply. Read all releavant:
 
-- ./naming.md when editing and reviewing test case names
-- ./what-to-test.md when deciding what code to cover or reviewing cases
-- ./new-angular-suite.{runner}.md when planning a new angular test suite
-- ./components.{runner}.md when editing or reviewing component tests
-- ./mocking-pattern.{runner}.md when editing or reviewing suite mocks
+- ./naming.md when editing or reviewing test case names
+- ./what-to-test.md when deciding what code to cover or reviewing chosen cases
+- ./angular-suite-structure.{runner}.md when creating a new angular test suite, mocking dependencies or reviewing a test sutie
 - ./codestyle.{runner}.md when editing or reviewing individual cases. It describes all best practices and how to fix anti-patterns
